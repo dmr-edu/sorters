@@ -3,16 +3,15 @@ import { ArrayGenerator } from "./ArrayGenerator";
 interface RunTestConfig {
   sorter: any,
   method: any,
-  generateFunc: 'generateSortedArray' | 'generateSortedArrayWithmixedNumberOfValuePairs' | 'generateArr',
+  generateFunc: 'generateSortedArray' | 'generateSortedArrayWithmixedNumberOfValuePairs' | 'generateRandomArray',
   times?: number,
   sizes?: number[],
   digitsMaxValues?: number[],
-  mixedPairsCount?: number
 }
 
 export class Sorter {
 
-  static stringify(arr, withZeros = false): [arr: string[], length: number] {
+  static stringify(arr, withZeros = false): [string[], number] {
     let max = arr[0];
     let length = String(max).length;
 
@@ -55,37 +54,55 @@ export class Sorter {
     generateFunc,
     times = 20,
     sizes = [
-      // 100,
-      // 5000,
-      100000
+      1000000
     ],
     digitsMaxValues = [
-      // 10,
-      // 1000,
-      // 10000,
       10000000
-    ],
-    mixedPairsCount = 3
+    ]
   }: RunTestConfig) {
 
     const results: any = {};
 
     for (let j = 0; j < digitsMaxValues.length; j++) {
-      const key = 'Array MAX value: ' + this.formatNumber(digitsMaxValues[j]);
-      // @ts-ignore
+      const key = 'Максимальное число в массиве: ' + this.formatNumber(digitsMaxValues[j]);
       results[key] = {};
       for (let g = 0; g < sizes.length; g++) {
-        const arrayLengthKey = 'Array size: ' + this.formatNumber(sizes[g])
+        const arrayLengthKey = 'Длина массива: ' + this.formatNumber(sizes[g])
         const array = ArrayGenerator[generateFunc](sizes[g], digitsMaxValues[j]);
         results[key][arrayLengthKey] = this.getAverageTime(sorter[method], times, array);
       }
     }
 
     return {
-      'Class name': sorter.name,
-      'Method name': method,
-      [`Number of runs to determine the average execution time of the \"${method}\" method`]: times,
-      'Results by arrays MAX values': results
+      'Класс сортировки': sorter.name,
+      'Метод сортировки': method,
+      'Функция генерации массива': generateFunc,
+      'Количество повторений для расчета среднего времени выполнения функции': times,
+      'Результаты по максимальным значениям': results
     }
+  }
+
+  static runTestGroup({ sortMethods, ...config }: Omit<RunTestConfig, 'method' | 'generateFunc'> & { sortMethods: string[] }) {
+    const generateFuncs: Parameters<typeof Sorter.runTest>[0]['generateFunc'][] = ['generateSortedArray', 'generateSortedArrayWithmixedNumberOfValuePairs', 'generateRandomArray'];
+    const start = performance.now();
+    let hasRepeated = false;
+    for (let s = 0; s < sortMethods.length; s++) {
+      for (let i = 0; i < generateFuncs.length; i++) {
+        const conf = {
+          method: sortMethods[s],
+          generateFunc: generateFuncs[i],
+          ...config
+        }
+        if (!hasRepeated) {
+          hasRepeated = true;
+          // Для первой итерации прогнать тест 2 раза для исключения искажения результатов.
+          Sorter.runTest(conf)
+          Sorter.runTest(conf)
+        }
+        console.log(JSON.stringify(Sorter.runTest(conf), null, 4))
+      }
+    }
+
+    console.log('Звершено за: ', (performance.now() - start).toFixed(2), ' ms')
   }
 }

@@ -1,9 +1,10 @@
 export class ArrayGenerator {
   static getRandomInt = (max) => {
-    return Math.floor(Math.random() * max) * (Math.random() > 0.5 ? 1 : -1);
+    let value = Math.floor(Math.random() * max);
+    return value !== 0 ? value * (Math.random() > 0.5 ? 1 : -1) : value;
   }
 
-  static generateArr = (length, max) => {
+  static generateRandomArray = (length, max) => {
     const arr: number[] = [];
     for (let i = 0; i < length; i++) {
       arr.push(this.getRandomInt(max))
@@ -11,9 +12,9 @@ export class ArrayGenerator {
     return arr;
   }
 
-  static generateSortedArrayWithmixedNumberOfValuePairs(length, max) {
+  static generateSortedArrayWithmixedNumberOfValuePairs(length, max, mixCount = 5) {
     const arr = this.generateSortedArray(length, max);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < mixCount; i++) {
       let startI = Math.abs(this.getRandomInt(arr.length - 1));
       let endI = startI;
       while (startI == endI) {
@@ -27,7 +28,7 @@ export class ArrayGenerator {
   }
 
   static generateSortedArray(length, max) {
-    const arr = this.generateArr(length, max);
+    const arr = this.generateRandomArray(length, max);
     return arr.sort((a, b) => a - b);
   }
 }

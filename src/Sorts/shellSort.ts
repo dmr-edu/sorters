@@ -1,15 +1,13 @@
-import { ShellSorter } from "./src/ShellSorter";
+import { ShellSorter } from "./ShellSorter";
 
 const sortMethods = ['sort'];
 
 const sizes = [
-  100,
-  10000,
-  10000000
+  500, 1000,
+  100000
 ],
   digitsMaxValues = [
-    10000,
-    1000000000
+    10000
   ];
 const config = {
   sorter: ShellSorter,

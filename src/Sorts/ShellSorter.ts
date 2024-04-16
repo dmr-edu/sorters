@@ -16,6 +16,6 @@ export class ShellSorter extends Sorter {
       i++;
       next++
     }
-    return step === 1 ? InsertionSorter.insertionSort(array) : ShellSorter.sort(array, Math.round(_step / 2))
+    return step === 1 ? InsertionSorter.insertionSortOptimized(array) : ShellSorter.sort(array, Math.round(_step / 2))
   }
 }

@@ -1,15 +1,14 @@
-import { QuickSorter } from "./src/QuickSorter";
+import { QuickSorter } from "./QuickSorter";
 
-const sortMethods = ['quickSortOptimized', 'quickSort'];
+const sortMethods = ['quickSortOptimized'];
 
 const sizes = [
-  5000,
-  10000,
-  10000000
+  1000,
+  100000,
+  1000000
 ],
   digitsMaxValues = [
-    10000,
-    1000000000
+    10000
   ];
 const config = {
   sorter: QuickSorter,

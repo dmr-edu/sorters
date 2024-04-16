@@ -1,11 +1,10 @@
-import { MergeSorter } from "./src/MergeSorter";
+import { MergeSorter } from "./MergeSorter";
 
 const sortMethods = ['mergeSort'];
 
 const sizes = [
-  5000,
-  100000,
-  1000000
+  1000,
+  100000
 ],
   digitsMaxValues = [
     100,

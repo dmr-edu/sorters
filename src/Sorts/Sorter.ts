@@ -96,8 +96,8 @@ export class Sorter {
         if (!hasRepeated) {
           hasRepeated = true;
           // Для первой итерации прогнать тест 2 раза для исключения искажения результатов.
-          Sorter.runTest(conf)
-          Sorter.runTest(conf)
+          console.log(JSON.stringify(Sorter.runTest(conf), null, 4))
+          console.log(JSON.stringify(Sorter.runTest(conf), null, 4))
         }
         console.log(JSON.stringify(Sorter.runTest(conf), null, 4))
       }

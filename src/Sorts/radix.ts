@@ -1,18 +1,18 @@
-import { RadixSorter } from "./src/RadixSorter";
+import { RadixSorter } from "./RadixSorter";
 
 const sortMethods = ['sortByLowerOrder', 'sortByOlderOrder'];
 
 const sizes = [
-  100000,
-  10000000
+  10000
 ],
   digitsMaxValues = [
+    10,
     10000,
-    1000000000
+    10000000
   ];
 const config = {
   sorter: RadixSorter,
-  times: 20,
+  times: 10,
   sizes,
   digitsMaxValues,
   sortMethods

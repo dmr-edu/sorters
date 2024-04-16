@@ -1,19 +1,16 @@
-import { BubbleSorter } from "./src/BubbleSorter";
+import { BubbleSorter } from "./BubbleSorter";
 
-const sortMethods = ['bubbleSort'];
+const sortMethods = ['bubbleSort', 'bubbleSortSlow'];
 
 const sizes = [
-  500,
-  10000,
-  100000
+  1000,
 ],
   digitsMaxValues = [
-    100,
-    10000000
+    10000
   ];
 const config = {
   sorter: BubbleSorter,
-  times: 20,
+  times: 10,
   sizes,
   digitsMaxValues,
   sortMethods

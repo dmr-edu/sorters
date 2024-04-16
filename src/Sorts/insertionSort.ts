@@ -1,15 +1,13 @@
-import { InsertionSorter } from "./src/InsertionSorter";
+import { InsertionSorter } from "./InsertionSorter";
 
-const sortMethods = ['insertionSort'];
+const sortMethods = ['insertionSortOptimized'];
 
 const sizes = [
-  5000,
-  10000,
-  1000000
+  500,
+  10000
 ],
   digitsMaxValues = [
-    100,
-    1000000
+    100000
   ];
 const config = {
   sorter: InsertionSorter,
